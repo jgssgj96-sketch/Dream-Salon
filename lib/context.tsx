@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 import { Appointment, Service, Barber, Review } from "./types";
 
 export const SalonContext = createContext({} as any);
@@ -20,10 +20,18 @@ export function SalonProvider({ children }: { children: React.ReactNode }) {
     isOpenToday: false,
     heroBadge: "",
     satisfactionText: "",
+    heroImage: null,
   });
 
   const [selectedServiceIds, setSelectedServiceIds] = useState<string[]>([]);
-  const [openBooking, setOpenBooking] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+
+  const openBooking = () => {
+    setIsBookingOpen(true);
+  };
+  const closeBooking = () => {
+    setIsBookingOpen(false);
+  };
 
   // Add a new service
   const addService = (service: Omit<Service, "id">) => {
@@ -89,41 +97,37 @@ export function SalonProvider({ children }: { children: React.ReactNode }) {
     setSelectedServiceIds(newSelectedIds);
   };
 
-  // Open booking modal
-  const openBooking = () => {
-    setOpenBooking(true);
-  };
-
-  // Close booking modal
-  const closeBooking = () => {
-    setOpenBooking(false);
-    setSelectedServiceIds([]);
-  };
-
   return (
-    <SalonContext.Provider {
-      value: {
-        services,
-        barbers,
-        appointments,
-        reviews,
-        salonInfo,
-        selectedServiceIds,
-        openBooking,
-        closeBooking,
-        toggleSelectService,
-        addService,
-        deleteService,
-        addBarber,
-        deleteBarber,
-        updateAppointmentStatus,
-        deleteAppointment,
-        addReview,
-        updateSalonInfo,
-        deleteReview,
+    <SalonContext.Provider
+      value={
+        {
+          services,
+          barbers,
+          appointments,
+          reviews,
+          salonInfo,
+          selectedServiceIds,
+          isBookingOpen,
+          openBooking,
+          closeBooking,
+          toggleSelectService,
+          addService,
+          deleteService,
+          addBarber,
+          deleteBarber,
+          updateAppointmentStatus,
+          deleteAppointment,
+          addReview,
+          updateSalonInfo,
+          deleteReview,
+        }
       }
-    }>
+    >
       {children}
     </SalonContext.Provider>
   );
+}
+
+export function useSalon() {
+  return useContext(SalonContext);
 }

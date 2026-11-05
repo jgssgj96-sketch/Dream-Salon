@@ -46,7 +46,7 @@ export default function Services() {
             <button
               key={tab.id}
               onClick={() => setFilter(tab.id)}
-              className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 ₹{
+              className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 ${
                 filter === tab.id
                   ? "bg-gold text-surface shadow-gold"
                   : "bg-surface-2 text-off-white/70 hover:bg-surfaceHover hover:text-off-white border border-white/5"
@@ -74,7 +74,7 @@ export default function Services() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.08 }}
-                  className={`relative rounded-2xl p-6 bg-surface-2 border transition-all duration-300 flex flex-col justify-between group hover:border-gold/50 ₹{
+                  className={`relative rounded-2xl p-6 bg-surface-2 border transition-all duration-300 flex flex-col justify-between group hover:border-gold/50 ${
                     isSelected ? "border-gold ring-1 ring-gold/40 bg-[#222228]" : "border-white/10"
                   }`}
                 >
@@ -85,7 +85,7 @@ export default function Services() {
                       </div>
                       <div className="text-right">
                         <span className="text-2xl font-display font-bold text-gold">
-                          ₹{service.price}
+                          $
                         </span>
                         <div className="flex items-center gap-1 text-[11px] text-muted justify-end mt-0.5">
                           <Clock className="w-3 h-3" />
@@ -105,7 +105,7 @@ export default function Services() {
                   <div className="pt-4 border-t border-white/5 flex items-center gap-3">
                     <button
                       onClick={() => toggleSelectService(service.id)}
-                      className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold tracking-wide transition-all flex items-center justify-center gap-1.5 ₹{
+                      className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold tracking-wide transition-all flex items-center justify-center gap-1.5 ${
                         isSelected
                           ? "bg-gold/20 text-gold border border-gold/40"
                           : "bg-surface text-off-white/80 hover:bg-surfaceHover border border-white/10"

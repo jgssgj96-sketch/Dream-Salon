@@ -12,7 +12,7 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { useSalon } from "@/lib/context";
-import { Barber } from "@/lib/types";
+import { Barber, Service } from "@/lib/types";
 
 const TIME_SLOTS = [
   "09:00 AM",
@@ -55,11 +55,11 @@ export default function BookingModal() {
 
   if (!isBookingOpen) return null;
 
-  const chosenServices = services.filter((s) =>
+  const chosenServices = services.filter((s: Service) =>
     selectedServiceIds.includes(s.id)
   );
-  const totalPrice = chosenServices.reduce((sum, s) => sum + s.price, 0);
-  const totalDuration = chosenServices.reduce((sum, s) => sum + s.duration, 0);
+  const totalPrice = chosenServices.reduce((sum: number, s: Service) => sum + s.price, 0);
+  const totalDuration = chosenServices.reduce((sum: number, s: Service) => sum + s.duration, 0);
 
   const handleNextStep = () => {
     if (step === 1 && chosenServices.length === 0) return;
@@ -130,7 +130,7 @@ export default function BookingModal() {
             ].map((item) => (
               <div
                 key={item.s}
-                className={`flex items-center gap-1.5 ₹{
+                className={`flex items-center gap-1.5 $
                   step === item.s
                     ? "text-gold font-bold"
                     : step > item.s
@@ -139,7 +139,7 @@ export default function BookingModal() {
                 }`}
               >
                 <span
-                  className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ₹{
+                  className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] $
                     step === item.s
                       ? "bg-gold text-surface"
                       : step > item.s
@@ -170,13 +170,13 @@ export default function BookingModal() {
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {services.map((s) => {
+                  {services.map((s: Service) => {
                     const isSelected = selectedServiceIds.includes(s.id);
                     return (
                       <div
                         key={s.id}
                         onClick={() => toggleSelectService(s.id)}
-                        className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center justify-between ₹{
+                        className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center justify-between $
                           isSelected
                             ? "bg-surface-2 border-gold ring-1 ring-gold/40"
                             : "bg-surface-2/40 border-white/5 hover:border-white/20"
@@ -192,7 +192,7 @@ export default function BookingModal() {
                         </div>
                         <div className="text-right pl-4">
                           <span className="font-display font-bold text-lg text-gold">
-                            ₹{s.price}
+                            ${s.price}
                           </span>
                         </div>
                       </div>
@@ -208,13 +208,13 @@ export default function BookingModal() {
             <div className="space-y-4">
               <p className="text-sm text-muted">Choose your preferred master barber:</p>
               <div className="grid sm:grid-cols-2 gap-4">
-                {barbers.map((b) => {
+                {barbers.map((b: Barber) => {
                   const isSelected = selectedBarber.id === b.id;
                   return (
                     <div
                       key={b.id}
                       onClick={() => setSelectedBarber(b)}
-                      className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center gap-4 ₹{
+                      className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center gap-4 $
                         isSelected
                           ? "bg-surface-2 border-gold ring-1 ring-gold/40"
                           : "bg-surface-2/40 border-white/5 hover:border-white/20"
@@ -270,7 +270,7 @@ export default function BookingModal() {
                         key={slot}
                         type="button"
                         onClick={() => setSelectedTime(slot)}
-                        className={`py-3 rounded-xl text-xs font-semibold transition-all border ₹{
+                        className={`py-3 rounded-xl text-xs font-semibold transition-all border $
                           isSelected
                             ? "bg-gold text-surface border-gold shadow-gold"
                             : "bg-surface-2 border-white/5 text-off-white/80 hover:border-white/20"
@@ -389,7 +389,7 @@ export default function BookingModal() {
                 <div className="flex justify-between pt-1 text-sm font-bold">
                   <span className="text-off-white">Total Amount Due:</span>
                   <span className="text-gold font-display text-base">
-                    ₹{confirmedAppointment.price}
+                    ${confirmedAppointment.price}
                   </span>
                 </div>
               </div>
@@ -410,7 +410,7 @@ export default function BookingModal() {
           <div className="p-5 bg-surface-2 border-t border-white/10 flex items-center justify-between">
             <div>
               <div className="text-[11px] text-muted">Total: {totalDuration} mins</div>
-              <div className="text-xl font-display font-bold text-gold">₹{totalPrice}</div>
+              <div className="text-xl font-display font-bold text-gold">${totalPrice}</div>
             </div>
 
             <div className="flex items-center gap-3">

@@ -92,6 +92,7 @@ export default function ReviewsForm() {
             {Array.from({ length: 5 }).map((_, i) => (
               <button
                 key={i}
+                type="button"
                 onClick={() => setRating(i + 1)}
                 className={`p-1 rounded-full transition-all ${
                   rating === i + 1
