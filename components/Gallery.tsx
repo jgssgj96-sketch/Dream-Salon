@@ -38,7 +38,7 @@ export default function Gallery() {
             <button
               key={cat}
               onClick={() => setActiveTab(cat)}
-              className={`px-5 py-2 rounded-full text-xs font-semibold transition-all ${
+              className={`px-5 py-2 rounded-full text-xs font-semibold transition-all ₹{
                 activeTab === cat
                   ? "bg-gold text-surface"
                   : "bg-surface text-off-white/70 hover:text-off-white border border-white/10"

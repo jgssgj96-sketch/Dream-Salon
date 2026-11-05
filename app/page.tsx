@@ -5,6 +5,8 @@ import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Gallery from "@/components/Gallery";
 import Reviews from "@/components/Reviews";
+import ReviewsForm from "@/components/ReviewsForm";
+import ReviewsForm from "@/components/ReviewsForm";
 import Contact from "@/components/Contact";
 import BookingModal from "@/components/BookingModal";
 import Footer from "@/components/Footer";
@@ -21,6 +23,7 @@ export default function Home() {
       <Services />
       <Gallery />
       <Reviews />
+      <ReviewsForm />
       <Contact />
       <Footer />
 
