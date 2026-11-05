@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import { useSalon } from "@/lib/context";
+import { Review } from "@/lib/types";
 
 export default function Reviews() {
   const { reviews } = useSalon();
@@ -25,13 +26,13 @@ export default function Reviews() {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {reviews.map((rev, index) => (
+            {reviews.map((rev: Review, _index: number) => (
               <motion.div
                 key={rev.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
+                transition={{ delay: _index * 0.08 }}
                 className="p-6 rounded-2xl bg-surface-2 border border-white/10 flex flex-col justify-between space-y-4"
               >
                 <Quote className="absolute top-4 right-4 w-8 h-8 text-white/5 pointer-events-none" />

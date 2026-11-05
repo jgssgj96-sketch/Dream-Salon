@@ -8,7 +8,7 @@ export default function Hero() {
   const { openBooking, reviews, barbers, salonInfo } = useSalon();
 
   const avgRating = reviews.length
-    ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1)
+    ? (reviews.reduce((acc: number, r: { rating: number }) => acc + r.rating, 0) / reviews.length).toFixed(1)
     : "0.0";
 
   return (

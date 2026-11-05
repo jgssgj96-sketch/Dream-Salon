@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Scissors, Zap, Crown, Sparkles, Heart, Users, Clock, Check, Plus } from "lucide-react";
 import { useSalon } from "@/lib/context";
+import { Service } from "@/lib/types";
 
 const ICON_MAP: Record<string, any> = {
   Scissors,
@@ -21,7 +22,7 @@ export default function Services() {
   const filteredServices =
     filter === "all"
       ? services
-      : services.filter((s) => s.category === filter);
+      : services.filter((s: Service) => s.category === filter);
 
   return (
     <section id="services" className="py-24 bg-surface relative">
@@ -63,7 +64,7 @@ export default function Services() {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredServices.map((service, index) => {
+            {filteredServices.map((service: Service, _index: number) => {
               const IconComponent = ICON_MAP[service.icon] || Scissors;
               const isSelected = selectedServiceIds.includes(service.id);
 
@@ -73,7 +74,7 @@ export default function Services() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
+                  transition={{ delay: _index * 0.08 }}
                   className={`relative rounded-2xl p-6 bg-surface-2 border transition-all duration-300 flex flex-col justify-between group hover:border-gold/50 ${
                     isSelected ? "border-gold ring-1 ring-gold/40 bg-[#222228]" : "border-white/10"
                   }`}
